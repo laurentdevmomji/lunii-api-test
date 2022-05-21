@@ -52,3 +52,6 @@ docker build -t lunii-api-test .
 ```sh
 npm test
 ```
+
+## Swagger
+``sh /docs```

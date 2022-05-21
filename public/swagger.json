@@ -53,6 +53,18 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"IShortUrlPayload": {
+				"properties": {
+					"originalUrl": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"originalUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -109,6 +121,36 @@
 				],
 				"security": [],
 				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateShortUrl",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ShortUrl"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"ShortUrl"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IShortUrlPayload"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/shorturls/{id}": {

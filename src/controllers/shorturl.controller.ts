@@ -1,4 +1,4 @@
-import { Get, Route, Tags, Post as PostMethod, Body, Path } from 'tsoa';
+import { Get, Route, Tags, Post, Body, Path } from 'tsoa';
 import { ShortUrl } from '../models';
 import {
   createShortUrl,
@@ -15,7 +15,7 @@ export default class ShortUrlController {
     return getShortUrls();
   }
 
-  @PostMethod('/')
+  @Post('/')
   public async createShortUrl(@Body() body: IShortUrlPayload): Promise<ShortUrl> {
     return createShortUrl(body);
   }
