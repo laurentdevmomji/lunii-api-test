@@ -1,7 +1,7 @@
 import * as Joi from 'joi'; // KO : error TS2307: Cannot find module 'joi' or its corresponding type declarations. 
 
 import {ConnectionOptions} from 'typeorm';
-import {User, Post, Comment} from '../models';
+import {ShortUrl} from '../models';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -53,22 +53,10 @@ const dbConfig : ConnectionOptions = {
   password: envVars.DB_PASSWORD,
   database: envVars.DB_NAME,
   
-  entities: [User, Post, Comment],
+  entities: [ShortUrl],
   synchronize: true,
 }
 // console.log('dbConfig:', dbConfig); 
-
-// const dbConfig : ConnectionOptions = {
-//   type: "postgres",
-//   host: process.env.POSTGRES_HOST || "localhost",
-//   port: Number(process.env.POSTGRES_PORT) || 5432,
-//   username: process.env.POSTGRES_USER || "postgres",
-//   password: process.env.POSTGRES_PASSWORD || "postgres",
-//   database: process.env.POSTGRES_DB || "postgres",
-  
-//   entities: [User, Post, Comment],
-//   synchronize: true,
-// }
 
 export  {
   appConfig,

@@ -1,93 +1,29 @@
 import faker from 'faker'
-import { User, Post } from '../../src/models';
+// import { ShortUrl } from '../../src/models';
 
-export function generateUserData(overide = {}) {
+
+export function generateShortUrlData(overide = {}) {
   return {
     id: faker.datatype.number(),
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-    posts: [],
-    comments: [],
+    originalUrl: faker.internet.url(),
+    shortUrl: faker.internet.url(),
+    nbClicks: faker.datatype.number(),
     createdAt: new Date(),
     updatedAt: new Date(),
     ...overide
   }
 }
 
-export function generateUsersData(n = 1) {
+export function generateShortUrlsData(n = 1, overide = {}) {
   return Array.from({
     length: n
   }, (_, i) => {
-    return generateUserData()
+    return generateShortUrlData(overide)
   });
 }
 
-export function generateUserPayload() {
+export function generateShortUrlPayload() {
   return {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-  }
-}
-
-export function generatePostData(overide = {}) {
-  return {
-    id: faker.datatype.number(),
-    title: faker.lorem.sentence(),
-    content: faker.lorem.paragraph(),
-    userId: faker.datatype.number(),
-    comments: [],
-    user: new User(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    ...overide
-  }
-}
-
-export function generatePostsData(n = 1, overide = {}) {
-  return Array.from({
-    length: n
-  }, (_, i) => {
-    return generatePostData(overide)
-  });
-}
-
-export function generatePostPayload() {
-  return {
-    title: faker.lorem.sentence(),
-    content: faker.lorem.paragraph(),
-    userId: faker.datatype.number(),
-  }
-}
-
-export function generateCommentData(overide = {}) {
-  return {
-    id: faker.datatype.number(),
-    content: faker.lorem.paragraph(),
-    userId: faker.datatype.number(),
-    user: new User(),
-    postId: faker.datatype.number(),
-    post: new Post(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    ...overide
-  }
-}
-
-export function generateCommentsData(n = 1, overide = {}) {
-  return Array.from({
-    length: n
-  }, (_, i) => {
-    return generateCommentData(overide)
-  });
-}
-
-
-export function generateCommentPayload() {
-  return {
-    content: faker.lorem.paragraph(),
-    userId: faker.datatype.number(),
-    postId: faker.datatype.number(),
+    originalUrl: faker.internet.url(),
   }
 }
