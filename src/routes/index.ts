@@ -27,10 +27,14 @@ router.get('/shorturl/:shortUrl', async (req, res) => {
   if (!data){
     return HttpUtils.sendHttpErrorResponse(res, `No shorturl found with id ${req.params.shortUrl}`, 404);
   } 
-  // return HttpUtils.sendSuccessResponse(res, data);
+
+  // increment nbClicks
+  const nbClicks = data.nbClicks+1;
+
+  return HttpUtils.sendSuccessResponse(res, data);
 
   // redirect to originalUrl ...
-  res.redirect(302, data.originalUrl);
+  // res.redirect(302, data.originalUrl);
 });
 
 router.use('/shorturls', ShortUrlRouter);

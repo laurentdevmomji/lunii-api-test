@@ -29,11 +29,25 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const controller = new ShortUrlController();
-  const data = await controller.getShortUrl(req.params.id);
+  const data = await controller.getShortUrl(Number(req.params.id));
   if (!data){
     return HttpUtils.sendHttpErrorResponse(res, `No shorturl found with id ${req.params.id}`, 404);
   } 
   return HttpUtils.sendSuccessResponse(res, data);
+});
+
+router.patch('/:id', async (req, res) => {
+  try {
+    const controller = new ShortUrlController();
+    const data = await controller.patchShortUrl(Number(req.params.id), req.body);
+    return HttpUtils.sendSuccessResponse(res, data);
+  }
+  catch(error: any){
+    if (error instanceof HttpError) {
+      return HttpUtils.sendHttpErrorResponse(res, error.message, error.statusCode)
+    }
+    return HttpUtils.sendErrorResponse(res, error.message);
+  }
 });
 
 

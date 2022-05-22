@@ -9,6 +9,7 @@ import {generateShortURL} from '../helpers/app.helpers'
 export interface IShortUrlPayload {
   originalUrl: string;
   shortUrl: string;
+  nbClicks: number;
 }
 
 export const getShortUrls = async (): Promise<Array<ShortUrl>> => {
@@ -52,6 +53,41 @@ export const getShortUrlByShortUrl = async (_shortUrl: string): Promise<ShortUrl
   } 
   return shortUrl;
 };
+
+export const patchShortUrl = async (id: number, payload: IShortUrlPayload): Promise<ShortUrl | null> => {
+  const repository = getRepository(ShortUrl);
+
+  const shortUrl = await repository.findOne({ id: id });
+  if (!shortUrl){
+    return null;
+  } 
+
+  // -- validation
+  if (payload?.originalUrl){
+    if (!validateOriginalUrl(payload.originalUrl)){
+      throw new HttpError(400, `${payload.originalUrl} is not a valid url !`)
+    }
+  }
+  
+  // -- update shortUrl
+  if (payload?.shortUrl){
+      // TODO : add 'salt' (concat next available id with originalUrl)
+      payload.shortUrl = generateShortURL(payload.originalUrl)
+  }
+
+  await repository.update(id, {
+    ...shortUrl,
+    ...payload,
+  });
+
+  const updatedShortUrl =  await repository.findOne({ id: id });
+  if (!updatedShortUrl){
+    return null;
+  }
+  return updatedShortUrl;
+};
+
+
 
 export const getShortUrlAnalytics = async (): Promise<Array<ShortUrl>> => {
   const repository = getRepository(ShortUrl);

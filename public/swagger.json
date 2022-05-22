@@ -61,11 +61,16 @@
 					},
 					"shortUrl": {
 						"type": "string"
+					},
+					"nbClicks": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
 					"originalUrl",
-					"shortUrl"
+					"shortUrl",
+					"nbClicks"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -187,10 +192,56 @@
 						"name": "id",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"format": "double",
+							"type": "number"
 						}
 					}
 				]
+			},
+			"patch": {
+				"operationId": "PatchShortUrl",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/ShortUrl"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"ShortUrl"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IShortUrlPayload"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

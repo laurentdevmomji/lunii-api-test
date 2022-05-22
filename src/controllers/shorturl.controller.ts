@@ -1,4 +1,4 @@
-import { Get, Route, Tags, Post, Body, Path } from 'tsoa';
+import { Get, Route, Tags, Post, Body, Path, Patch } from 'tsoa';
 import { ShortUrl } from '../models';
 import {
   createShortUrl,
@@ -7,6 +7,7 @@ import {
   getShortUrl,
   getShortUrlAnalytics,
   getShortUrlByShortUrl,
+  patchShortUrl,
 } from '../repositories/shorturl.repository';
 
 @Route('shorturls')
@@ -23,13 +24,18 @@ export default class ShortUrlController {
   }
 
   @Get('/:id')
-  public async getShortUrl(@Path() id: string): Promise<ShortUrl | null> {
+  public async getShortUrl(@Path() id: number): Promise<ShortUrl | null> {
     return getShortUrl(Number(id));
   }
 
   // @Get('/:shortUrl')
   public async getShortUrlByShortUrl(@Path() shortUrl: string): Promise<ShortUrl | null> {
     return getShortUrlByShortUrl(shortUrl);
+  }
+
+  @Patch('/:id')
+  public async patchShortUrl(@Path() id: number, @Body() body: IShortUrlPayload): Promise<ShortUrl | null> {
+    return patchShortUrl(id, body);
   }
 
   // @Get('/:analytics')
