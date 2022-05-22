@@ -44,6 +44,15 @@ export const getShortUrl = async (id: number): Promise<ShortUrl | null> => {
   return shortUrl;
 };
 
+export const getShortUrlByShortUrl = async (_shortUrl: string): Promise<ShortUrl | null> => {
+  const repository = getRepository(ShortUrl);
+  const shortUrl = await repository.findOne({ shortUrl: _shortUrl });
+  if (!shortUrl){
+    return null;
+  } 
+  return shortUrl;
+};
+
 export const getShortUrlAnalytics = async (): Promise<Array<ShortUrl>> => {
   const repository = getRepository(ShortUrl);
   return repository.find();

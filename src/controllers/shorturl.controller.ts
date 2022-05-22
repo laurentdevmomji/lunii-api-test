@@ -6,6 +6,7 @@ import {
   IShortUrlPayload,
   getShortUrl,
   getShortUrlAnalytics,
+  getShortUrlByShortUrl,
 } from '../repositories/shorturl.repository';
 
 @Route('shorturls')
@@ -24,6 +25,11 @@ export default class ShortUrlController {
   @Get('/:id')
   public async getShortUrl(@Path() id: string): Promise<ShortUrl | null> {
     return getShortUrl(Number(id));
+  }
+
+  // @Get('/:shortUrl')
+  public async getShortUrlByShortUrl(@Path() shortUrl: string): Promise<ShortUrl | null> {
+    return getShortUrlByShortUrl(shortUrl);
   }
 
   // @Get('/:analytics')
