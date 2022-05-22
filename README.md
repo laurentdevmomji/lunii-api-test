@@ -62,3 +62,9 @@ npm test
 
 ### TypeORM
 https://orkhan.gitbook.io/typeorm/docs
+
+### Joi schema validator 
+https://joi.dev/api/
+
+### Swagger
+https://swagger.io/
