@@ -27,8 +27,7 @@ export const createShortUrl = async (payload: IShortUrlPayload): Promise<ShortUr
   }
 
   // -- create shortUrl
-  // TODO : add 'salt' (concat next available id with originalUrl)
-  payload.shortUrl = generateShortURL(payload.originalUrl)
+  payload.shortUrl = generateShortURL(payload.originalUrl, 0, 10, Date.now().toString())
 
   return repository.save({
     ...shortUrl,
@@ -70,10 +69,10 @@ export const patchShortUrl = async (id: number, payload: IShortUrlPayload): Prom
   }
   
   // -- update shortUrl
-  if (payload?.shortUrl){
-      // TODO : add 'salt' (concat next available id with originalUrl)
-      payload.shortUrl = generateShortURL(payload.originalUrl)
-  }
+  // if (payload?.shortUrl){
+  //     // TODO : add 'salt' (concat next available id with originalUrl)
+  //     payload.shortUrl = generateShortURL(payload.originalUrl)
+  // }
 
   await repository.update(id, {
     ...shortUrl,

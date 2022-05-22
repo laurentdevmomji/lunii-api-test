@@ -9,6 +9,7 @@ import AnalyticsRouter from './analytics.router';
 import HttpUtils from '../utils/HttpUtils'
 
 import ShortUrlController from '../controllers/shorturl.controller';
+import { IShortUrlPayload } from '../repositories/shorturl.repository';
 
 const router = express.Router();
 
@@ -22,16 +23,21 @@ router.get('/ping', async (_req, res) => {
 router.get('/shorturl/:shortUrl', async (req, res) => {
   
   const controller = new ShortUrlController();
-  const data = await controller.getShortUrlByShortUrl(req.params.shortUrl);
+  const shortUrl = await controller.getShortUrlByShortUrl(req.params.shortUrl);
 
-  if (!data){
+  if (!shortUrl){
     return HttpUtils.sendHttpErrorResponse(res, `No shorturl found with id ${req.params.shortUrl}`, 404);
   } 
 
   // increment nbClicks
-  const nbClicks = data.nbClicks+1;
+  const body: IShortUrlPayload = {
+    nbClicks: shortUrl.nbClicks + 1,
+    originalUrl: shortUrl.originalUrl,
+    shortUrl: shortUrl.shortUrl,
+  }
 
-  return HttpUtils.sendSuccessResponse(res, data);
+  const patchedShortUrl = await controller.patchShortUrl(Number(shortUrl.id), body);
+  return HttpUtils.sendSuccessResponse(res, patchedShortUrl);
 
   // redirect to originalUrl ...
   // res.redirect(302, data.originalUrl);
