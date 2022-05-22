@@ -25,5 +25,7 @@ export function generateShortUrlsData(n = 1, overide = {}) {
 export function generateShortUrlPayload() {
   return {
     originalUrl: faker.internet.url(),
+    shortUrl: '',
+    nbClicks: 0
   }
 }

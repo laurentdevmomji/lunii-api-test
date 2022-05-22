@@ -49,7 +49,7 @@ describe("ShortUrlController", () => {
       const shortUrlData = generateShortUrlData({id})
       const spy = jest.spyOn(ShortUrlRepository, 'getShortUrl').mockResolvedValueOnce(shortUrlData)
       const controller = new ShortUrlController();
-      const shortUrl = await controller.getShortUrl(id.toString());
+      const shortUrl = await controller.getShortUrl(id);
       expect(shortUrl).toEqual(shortUrlData)
       expect(shortUrl?.id).toBe(id)
       expect(spy).toHaveBeenCalledWith(id)
@@ -60,7 +60,7 @@ describe("ShortUrlController", () => {
       const id = 1
       const spy = jest.spyOn(ShortUrlRepository, 'getShortUrl').mockResolvedValueOnce(null)
       const controller = new ShortUrlController();
-      const shortUrl = await controller.getShortUrl(id.toString());
+      const shortUrl = await controller.getShortUrl(id);
       expect(shortUrl).toBeNull()
       expect(spy).toHaveBeenCalledWith(id)
       expect(spy).toHaveBeenCalledTimes(1)
