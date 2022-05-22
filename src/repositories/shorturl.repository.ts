@@ -1,10 +1,14 @@
 import { getRepository } from 'typeorm';
+
 import { ShortUrl } from '../models';
-import { validateOriginalUrl } from '../validators/validators'
 import HttpError from '../utils/HttpError'
+
+import { validateOriginalUrl } from '../validators/validators'
+import {generateShortURL} from '../helpers/app.helpers'
 
 export interface IShortUrlPayload {
   originalUrl: string;
+  shortUrl: string;
 }
 
 export const getShortUrls = async (): Promise<Array<ShortUrl>> => {
@@ -16,10 +20,14 @@ export const createShortUrl = async (payload: IShortUrlPayload): Promise<ShortUr
   const repository = getRepository(ShortUrl);
   const shortUrl = new ShortUrl();
 
-  // validation
+  // -- validation
   if (!validateOriginalUrl(payload.originalUrl)){
     throw new HttpError(400, `${payload.originalUrl} is not a valid url !`)
   }
+
+  // -- create shortUrl
+  // TODO : add 'salt' (concat next available id with originalUrl)
+  payload.shortUrl = generateShortURL(payload.originalUrl)
 
   return repository.save({
     ...shortUrl,

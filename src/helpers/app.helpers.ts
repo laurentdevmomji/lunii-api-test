@@ -7,7 +7,7 @@ import crypto from 'crypto';
  * @param {Number} endIndex
  * @returns {String}
  */
-const generateShortURL = (longURL: string, startIndex: number, endIndex: number): string => {
+const generateShortURL = (longURL: string, startIndex = 0, endIndex = 10): string => {
     const hash = crypto.createHash('md5').update(longURL).digest('base64');
     return hash.substring(startIndex, endIndex + 1);
 };
