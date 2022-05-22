@@ -10,8 +10,6 @@ import Router from './routes';
 import {appConfig, dbConfig} from './config/app';
 import { getCorsOptions } from './config/cors';
 
-// const PORT = process.env.PORT || 8000;
-
 const app: Application = express();
 
 app.use(express.json());

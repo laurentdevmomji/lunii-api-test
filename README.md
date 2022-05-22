@@ -54,4 +54,11 @@ npm test
 ```
 
 ## Swagger
-``sh /docs```
+```sh
+/docs
+```
+
+## Features
+
+### TypeORM
+https://orkhan.gitbook.io/typeorm/docs
