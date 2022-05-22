@@ -69,4 +69,67 @@ describe("ShortUrlRepository", () => {
       expect(mockedGetRepo.findOne).toHaveBeenCalledTimes(1)
     })
   })
+
+  describe("getShortUrlByShortUrl", () => {
+    test("should return shortUrl from the database", async () => {
+      const id = 1
+      const shortUrlData = generateShortUrlData({id})
+      // console.log('shortUrlData', shortUrlData)
+      mockedGetRepo.findOne.mockResolvedValue(shortUrlData)
+      const shortUrl = await ShortUrlRepository.getShortUrlByShortUrl(shortUrlData.shortUrl);
+      // console.log('shortUrl', shortUrl)
+      expect(shortUrl).toEqual(shortUrlData)
+      expect(shortUrl?.id).toBe(id)
+      // expect(mockedGetRepo.findOne).toHaveBeenCalledWith({shortUrl})
+      expect(mockedGetRepo.findOne).toHaveBeenCalledTimes(1)
+    })
+
+    test("should return null if shortUrl not found", async () => {
+      // const id = 1
+      mockedGetRepo.findOne.mockResolvedValue(null)
+      const shortUrl = await ShortUrlRepository.getShortUrlByShortUrl('');
+      expect(shortUrl).toBeNull()
+      // expect(mockedGetRepo.findOne).toHaveBeenCalledWith({id})
+      expect(mockedGetRepo.findOne).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe("patchShortUrl", () => {
+    test("should patch shortUrl to the database", async () => {
+      
+      // TODO
+
+      // let shortUrlData;
+
+      // const id = 1
+      // shortUrlData = generateShortUrlData({id})
+      // mockedGetRepo.findOne.mockResolvedValue(shortUrlData)
+
+      // const shortUrl = await ShortUrlRepository.getShortUrl(id);
+      // console.log('shortUrl/shortUrlData', shortUrl, shortUrlData)
+
+      // const payload = generateShortUrlPayload();
+      // shortUrlData = generateShortUrlData(payload);
+      // console.log('shortUrlData', shortUrlData)
+
+      // mockedGetRepo.save.mockResolvedValue(shortUrlData)
+      // const patchedShortUrl = await ShortUrlRepository.patchShortUrl(shortUrl.id, payload);
+      // // shortUrl.shortUrl = payload.shortUrl;
+      // console.log('patchedShortUrl', patchedShortUrl)
+
+      // expect(patchedShortUrl).toMatchObject(payload)
+      // expect(patchedShortUrl).toEqual(shortUrlData)
+      // expect(mockedGetRepo.save).toHaveBeenCalledWith(payload)
+      // expect(mockedGetRepo.save).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe("nbClicksIncrement", () => {
+    // TODO
+  })
+
+  describe("redirectToOriginalUrl", () => {
+    // TODO
+  })
+
 })

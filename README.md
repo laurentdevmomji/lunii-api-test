@@ -41,6 +41,22 @@ Lunii API test
 3. Go to :
 ```sh http://localhost:8000/ping```
 
+## ShortUrl create / read
+
+1. Create shortUrl entry
+```sh
+curl --location --request POST 'http://localhost:8000/shorturls/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "originalUrl": "https://andy.name"
+}'
+```
+
+2. Access to originalURL by GET request
+```sh
+/shorturl/YQpgoPH+2hx
+```
+
 ## Build Docker image locally
 
 ```sh

@@ -37,10 +37,15 @@ router.get('/shorturl/:shortUrl', async (req, res) => {
   }
 
   const patchedShortUrl = await controller.patchShortUrl(Number(shortUrl.id), body);
-  return HttpUtils.sendSuccessResponse(res, patchedShortUrl);
+  if (!patchedShortUrl){
+    return HttpUtils.sendHttpErrorResponse(res, `A problem occured during patchedShortUrl ...`, 500);
+  } 
+
+  // dev
+  // return HttpUtils.sendSuccessResponse(res, patchedShortUrl);
 
   // redirect to originalUrl ...
-  // res.redirect(302, data.originalUrl);
+  res.redirect(302, patchedShortUrl.originalUrl);
 });
 
 router.use('/shorturls', ShortUrlRouter);
