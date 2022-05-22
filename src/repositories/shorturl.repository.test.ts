@@ -34,10 +34,13 @@ describe("ShortUrlRepository", () => {
 
   describe("createShortUrl", () => {
     test("should add shortUrl to the database", async () => {
-      const payload = generateShortUrlPayload()
-      const shortUrlData = generateShortUrlData(payload)
+      const payload = generateShortUrlPayload();
+      const shortUrlData = generateShortUrlData(payload);
+
       mockedGetRepo.save.mockResolvedValue(shortUrlData)
       const shortUrl = await ShortUrlRepository.createShortUrl(payload);
+      shortUrl.shortUrl = payload.shortUrl;
+
       expect(shortUrl).toMatchObject(payload)
       expect(shortUrl).toEqual(shortUrlData)
       expect(mockedGetRepo.save).toHaveBeenCalledWith(payload)

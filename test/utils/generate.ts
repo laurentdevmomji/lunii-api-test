@@ -1,4 +1,5 @@
 import faker from 'faker'
+import { generateShortURL } from '../../src/helpers/app.helpers';
 // import { ShortUrl } from '../../src/models';
 
 
@@ -6,7 +7,7 @@ export function generateShortUrlData(overide = {}) {
   return {
     id: faker.datatype.number(),
     originalUrl: faker.internet.url(),
-    shortUrl: faker.internet.url(),
+    shortUrl: generateShortURL(faker.internet.url(), 0, 10, Date.now().toString()),
     nbClicks: faker.datatype.number(),
     createdAt: new Date(),
     updatedAt: new Date(),
