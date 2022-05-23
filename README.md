@@ -77,9 +77,14 @@ curl --location --request POST 'http://localhost:8000/api/shorturls/' \
 }
 ```
 
-2. Access to originalURL by GET request
+3. Access to originalURL by GET request
 ```sh
 /api/shorturl/{shortUrl}
+```
+
+4. Access to shorturls analytics
+```sh
+/api/analytics/shorturls
 ```
 ## Run Jest unit tests
 
