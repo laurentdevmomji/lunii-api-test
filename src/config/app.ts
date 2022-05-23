@@ -39,6 +39,8 @@ const appConfig = {
     host: envVars.HOST,
     port: envVars.PORT,
 
+    apiBasePath: 'api',
+
     cors: {
       allowedHosts: envVars.CORS_ALLOWED_URLS.split(','),
     },

@@ -11,16 +11,18 @@ import HttpUtils from '../utils/HttpUtils'
 import ShortUrlController from '../controllers/shorturl.controller';
 import { IShortUrlPayload } from '../repositories/shorturl.repository';
 
+import { appConfig } from '../config/app';
+
 const router = express.Router();
 
-router.get('/ping', async (_req, res) => {
+router.get(`/${appConfig.apiBasePath}/ping`, async (_req, res) => {
   const controller = new PingController();
   const response = await controller.getMessage();
   return res.send(response);
 });
 
 // TODO : create appRouter ?
-router.get('/shorturl/:shortUrl', async (req, res) => {
+router.get(`/${appConfig.apiBasePath}/shorturl/:shortUrl`, async (req, res) => {
   
   const controller = new ShortUrlController();
   const shortUrl = await controller.getShortUrlByShortUrl(req.params.shortUrl);
@@ -48,7 +50,7 @@ router.get('/shorturl/:shortUrl', async (req, res) => {
   res.redirect(302, patchedShortUrl.originalUrl);
 });
 
-router.use('/shorturls', ShortUrlRouter);
-router.use('/analytics', AnalyticsRouter)
+router.use(`/${appConfig.apiBasePath}/shorturls`, ShortUrlRouter);
+router.use(`/${appConfig.apiBasePath}/analytics`, AnalyticsRouter)
 
 export default router;
