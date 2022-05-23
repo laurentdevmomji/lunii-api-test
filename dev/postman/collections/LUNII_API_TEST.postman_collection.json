@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"originalUrl\": \"https://www.google3.fr/\"\n}",
+							"raw": "{\n    \"originalUrl\": \"https://wanago.io\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,13 +24,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/shorturls/",
+							"raw": "http://localhost:8000/api/shorturls/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"shorturls",
 								""
 							]
@@ -82,13 +83,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/shorturls/9",
+							"raw": "http://localhost:8000/api/shorturls/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"shorturls",
 								"9"
 							]
@@ -102,13 +104,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/shorturls/",
+							"raw": "http://localhost:8000/api/shorturls/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"shorturls",
 								""
 							]
@@ -122,13 +125,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/shorturls/4",
+							"raw": "http://localhost:8000/api/shorturls/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
+								"api",
 								"shorturls",
 								"4"
 							]
@@ -144,13 +148,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/analytics/shorturls",
+					"raw": "http://localhost:8000/api/analytics/shorturls",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
+						"api",
 						"analytics",
 						"shorturls"
 					]
@@ -164,13 +169,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/ping/",
+					"raw": "http://localhost:8000/api/ping/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
+						"api",
 						"ping",
 						""
 					]
@@ -184,15 +190,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/shorturl/Ag7BrqlC1Mr",
+					"raw": "http://localhost:8000/api/shorturl/qJzNUbwSkkg",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8000",
 					"path": [
+						"api",
 						"shorturl",
-						"Ag7BrqlC1Mr"
+						"qJzNUbwSkkg"
 					]
 				}
 			},
